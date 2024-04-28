@@ -40,7 +40,7 @@ def parse_natural_gas_data_for_state_at_year(path_to_state_data, year_of_interes
     return data_for_specific_year
 
 
-def make_pie_chart_of_natural_gas_data(state_data_for_one_year, location_name, year):
+def make_pie_chart_of_natural_gas_data(state_data_for_one_year, location_name, year, show = False):
     data_row = state_data_for_one_year.iloc[0]
 
     # Prepare data for the pie chart, excluding the 'Date' and 'Total Delivered' columns
@@ -71,12 +71,13 @@ def make_pie_chart_of_natural_gas_data(state_data_for_one_year, location_name, y
     plt.tight_layout()
     plt.axis('equal')  # Equal aspect ratio ensures that the pie chart is circular.
     filepath = "../" + title
-    plt.savefig(filepath)
+    plt.savefig(filepath, transparent=True)
 
     # Display the pie chart
-    plt.show()
+    if show:
+        plt.show()
 
-def make_pie_chart_of_electrical_data(state_data_for_one_year, location_name, year):
+def make_pie_chart_of_electrical_data(state_data_for_one_year, location_name, year, show = False):
     data_row = state_data_for_one_year.iloc[0]
 
     # Prepare data for the pie chart, excluding the 'Date' column
@@ -107,12 +108,13 @@ def make_pie_chart_of_electrical_data(state_data_for_one_year, location_name, ye
     plt.tight_layout()
     plt.axis('equal')  # Equal aspect ratio ensures that the pie chart is circular.
     filepath = "../" + title
-    plt.savefig(filepath)
+    plt.savefig(filepath, transparent=True)
 
     # Display the pie chart
-    plt.show()
+    if show:
+        plt.show()
 
-def make_pie_chart_of_combined_data(state_data_for_one_year, location_name, year, combined = True):
+def make_pie_chart_of_combined_data(state_data_for_one_year, location_name, year, combined = True, show = False):
     data_row = state_data_for_one_year.iloc[0]
 
     # Prepare data for the pie chart, excluding the 'Date' column
@@ -127,21 +129,6 @@ def make_pie_chart_of_combined_data(state_data_for_one_year, location_name, year
         'Vehicle Fuel': 'gold',
         'Other': 'lightpink'
     }
-    # Darker colors for the 'Electricity' sectors
-    # darker_colors = {
-    #     'Residential Electricity': '#3E82FC',  # Darker shade of skyblue
-    #     'Commercial Electricity': '#4D8B2B',  # Darker shade of yellowgreen
-    #     'Industrial Electricity': '#FF5733',   # Darker shade of coral
-    #     'Vehicle Fuel Electricity': '#FFD700', # Darker shade of gold
-    #     'Other Electricity': '#FF1493',       # Darker shade of lightpink
-    # }
-    # darker_colors = {
-    #     'Residential Electricity': '#6699CC',  # Lighter shade of blue, close to sky blue
-    #     'Commercial Electricity': '#99CC66',   # Lighter shade of green, close to yellowgreen
-    #     'Industrial Electricity': '#FF9999',   # Lighter shade of red, close to coral
-    #     'Vehicle Fuel Electricity': '#FFD966', # Lighter shade of gold
-    #     'Other Electricity': '#FFB6C1',        # Lighter shade of pink, close to lightpink
-    # }
     darker_colors = {
         'Residential Electricity': '#5d99d6',  # Slightly darker than skyblue
         'Commercial Electricity': '#80c000',   # Slightly darker than yellowgreen
@@ -183,12 +170,13 @@ def make_pie_chart_of_combined_data(state_data_for_one_year, location_name, year
     filepath = "../" + title
     if combined: 
         filepath += ' combined'
-    plt.savefig(filepath)
+    plt.savefig(filepath, transparent=True)
 
     # Display the pie chart
-    plt.show()
+    if show:
+        plt.show()
 
-def make_pie_chart_of_electrical_source_data(state_data_for_one_year, location_name, year):
+def make_pie_chart_of_electrical_source_data(state_data_for_one_year, location_name, year, show = False):
     data_row = state_data_for_one_year.iloc[0]
 
     # Prepare data for the pie chart, excluding the 'Date' column
@@ -219,10 +207,11 @@ def make_pie_chart_of_electrical_source_data(state_data_for_one_year, location_n
     plt.tight_layout()
     plt.axis('equal')  # Equal aspect ratio ensures that the pie chart is circular.
     filepath = "../" + title
-    plt.savefig(filepath)
+    plt.savefig(filepath, transparent=True)
 
     # Display the pie chart
-    plt.show()
+    if show:
+        plt.show()
 
 def combine_state_ng_data(data_frames):
     # Combine all data frames by summing up their values
@@ -371,6 +360,8 @@ if __name__ == "__main__":
     read_in_electrival_usage = True
     read_in_electrical_generation = False
 
+    show = False
+
     if (read_in_ng_data):
         washington_data_2022 = parse_natural_gas_data_for_state_at_year(Washington_NG_Data_Path, year_of_interest) 
         oregon_data_2022 = parse_natural_gas_data_for_state_at_year(Oregon_NG_Data_Path, year_of_interest)
@@ -380,11 +371,11 @@ if __name__ == "__main__":
 
         us_data_2022 = parse_natural_gas_data_for_state_at_year(US_NG_Data_Path, year_of_interest)
 
-        # make_pie_chart_of_natural_gas_data(washington_data_2022, "Washington", year_of_interest)
-        # make_pie_chart_of_natural_gas_data(oregon_data_2022, "Oregon", year_of_interest)
-        # make_pie_chart_of_natural_gas_data(california_data_2022, "California", year_of_interest)
-        # make_pie_chart_of_natural_gas_data(west_coast_data_2022, 'the West Coast', year_of_interest)
-        # make_pie_chart_of_natural_gas_data(us_data_2022, "The United States", year_of_interest)
+        make_pie_chart_of_natural_gas_data(washington_data_2022, "Washington", year_of_interest)
+        make_pie_chart_of_natural_gas_data(oregon_data_2022, "Oregon", year_of_interest)
+        make_pie_chart_of_natural_gas_data(california_data_2022, "California", year_of_interest)
+        make_pie_chart_of_natural_gas_data(west_coast_data_2022, 'the West Coast', year_of_interest)
+        make_pie_chart_of_natural_gas_data(us_data_2022, "The United States", year_of_interest)
     
     if (read_in_electrival_usage):
         washington_electricity_data = parse_electricity_data_by_sector(retail_sales_of_electricity_path, year_of_interest, 'Washington')
@@ -393,11 +384,11 @@ if __name__ == "__main__":
         west_coast_electricity_data = parse_electricity_data_by_sector(retail_sales_of_electricity_path, year_of_interest, "Pacific Contiguous")
         united_states_electricity_data = parse_electricity_data_by_sector(retail_sales_of_electricity_path, year_of_interest, "United States")
 
-        # make_pie_chart_of_electrical_data(washington_electricity_data, 'Washington', year_of_interest)
-        # make_pie_chart_of_electrical_data(oregon_electricity_data, "Oregon", year_of_interest)
-        # make_pie_chart_of_electrical_data(california_electricity_data, "California", year_of_interest)
-        # make_pie_chart_of_electrical_data(west_coast_electricity_data, 'The West Coast', year_of_interest)
-        # make_pie_chart_of_electrical_data(united_states_electricity_data, "The United States", year_of_interest)
+        make_pie_chart_of_electrical_data(washington_electricity_data, 'Washington', year_of_interest)
+        make_pie_chart_of_electrical_data(oregon_electricity_data, "Oregon", year_of_interest)
+        make_pie_chart_of_electrical_data(california_electricity_data, "California", year_of_interest)
+        make_pie_chart_of_electrical_data(west_coast_electricity_data, 'The West Coast', year_of_interest)
+        make_pie_chart_of_electrical_data(united_states_electricity_data, "The United States", year_of_interest)
 
     if (read_in_electrical_generation):
         washington_electrical_generation_data = parse_electricity_generation_data_carbon(net_generation_for_all_sectors_path, year_of_interest, 'Washington')
@@ -405,17 +396,19 @@ if __name__ == "__main__":
         make_pie_chart_of_electrical_source_data(washington_electrical_generation_data, "Washington", year_of_interest)
 
     if (read_in_ng_data and read_in_electrival_usage):
-        combined_data_washington = allocate_ng_to_electricity_sectors(washington_data_2022, washington_electricity_data, True)
-        combined_data_oregon = allocate_ng_to_electricity_sectors(oregon_data_2022, oregon_electricity_data, True)
-        combined_data_california = allocate_ng_to_electricity_sectors(california_data_2022, california_electricity_data, True)
-        combined_data_west_coast = allocate_ng_to_electricity_sectors(west_coast_data_2022, west_coast_electricity_data, True)
-        combined_data_us = allocate_ng_to_electricity_sectors(us_data_2022, united_states_electricity_data, True)
+        combine = False
 
-        make_pie_chart_of_combined_data(combined_data_washington, "Washington", year_of_interest, True)
-        make_pie_chart_of_combined_data(combined_data_oregon, "Oregon", year_of_interest, True)
-        make_pie_chart_of_combined_data(combined_data_california, "California", year_of_interest, True)
-        make_pie_chart_of_combined_data(combined_data_west_coast, "The West Coast", year_of_interest, True)
-        make_pie_chart_of_combined_data(combined_data_us, "The United States", year_of_interest, True)
+        combined_data_washington = allocate_ng_to_electricity_sectors(washington_data_2022, washington_electricity_data, combine)
+        combined_data_oregon = allocate_ng_to_electricity_sectors(oregon_data_2022, oregon_electricity_data, combine)
+        combined_data_california = allocate_ng_to_electricity_sectors(california_data_2022, california_electricity_data, combine)
+        combined_data_west_coast = allocate_ng_to_electricity_sectors(west_coast_data_2022, west_coast_electricity_data, combine)
+        combined_data_us = allocate_ng_to_electricity_sectors(us_data_2022, united_states_electricity_data, combine)
+
+        make_pie_chart_of_combined_data(combined_data_washington, "Washington", year_of_interest, combine)
+        make_pie_chart_of_combined_data(combined_data_oregon, "Oregon", year_of_interest, combine)
+        make_pie_chart_of_combined_data(combined_data_california, "California", year_of_interest, combine)
+        make_pie_chart_of_combined_data(combined_data_west_coast, "The West Coast", year_of_interest, combine)
+        make_pie_chart_of_combined_data(combined_data_us, "The United States", year_of_interest, combine)
 
     
     
