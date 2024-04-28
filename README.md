@@ -11,4 +11,4 @@ I got the data from these queries
 The charts are for Washington, Oregon, and California, West Coast (which is all three) and the United States, sectors are Residential, Commertial, and Industrial.
 1) Natural Gas usage by sector (with electrical utility as a sector)
 2) Electrical Utility usage by sector
-3) I took the electrical utility usage by sector and applied it to the Natural gas usage to approximate the total use by sector, even if some is converted to electricity first  
+3) I took the electrical utility usage by sector and applied it to the Natural gas usage to approximate the total use by sector, even if some is converted to electricity first.  I have two pie charts for each of these, one with it added to the total sum, as well as in its own section (e.g. 'resedential electric' as the approximate portion of the natural gas burned for energy that went to resedential uses as electricity).
